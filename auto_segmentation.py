@@ -1,5 +1,4 @@
 import wfdb
-import wfdb.processing
 from biosppy.signals import ecg
 import numpy as np
 import matplotlib.pyplot as plt
