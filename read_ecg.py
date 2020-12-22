@@ -15,8 +15,6 @@ V1_raw = signal[:, 1]
 MLII = ecg.ecg(MLII_raw, fields['fs'], show=False)
 V1 = ecg.ecg(V1_raw, fields['fs'], show=False)
 
-print(fields['fs'])
-
 # plt.plot(MLII['templates_ts'], MLII['templates'].mean(axis=0))
 # plt.title('Heartbeat template')
 # plt.show()
