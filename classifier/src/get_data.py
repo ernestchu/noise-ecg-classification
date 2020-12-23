@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 # plt.show()
 
 ecg = None
-with h5py.File('../segmentation/100/2.h5', 'r') as f:
+with h5py.File('../segmentation/200/2.h5', 'r') as f:
     print(f['index'][()])
     print(len(f['MLII'][:]))
     print(str(f['label'][()], 'utf-8'))
