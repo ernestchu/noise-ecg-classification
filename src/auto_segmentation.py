@@ -2,7 +2,7 @@ import wfdb
 from biosppy.signals import ecg
 import numpy as np
 import matplotlib.pyplot as plt
-filename = '../mit-bih-noise-stress-test-database-1.0.0/119e06'
+filename = '../mit-bih-noise-stress-test-database-1.0.0/118e_6'
 record_preview = wfdb.rdrecord(filename, sampto=3000)
 annotation_preview = wfdb.rdann(filename, 'atr', sampto=3000)
 signal, fields = wfdb.rdsamp(filename)
@@ -11,7 +11,7 @@ annotation = wfdb.rdann(filename, 'atr')
 MLII_raw = signal[:, 0]
 # V1_raw = signal[:, 1]
 
-MLII = ecg.ecg(MLII_raw, fields['fs'])
+MLII = ecg.ecg(MLII_raw, fields['fs'], show=False)
 # V1 = ecg.ecg(V1_raw, fields['fs'], show=False)
 
 # plt.plot(MLII['templates_ts'], MLII['templates'].mean(axis=0))
@@ -60,7 +60,7 @@ for i in range(5):
     axs[i].plot(MLII_Segments[i])
     # axs[, i].plot(V1_Segments[i])
     axs[i].set_title(annotation.symbol[i])
-plt.show()
+# plt.show()
 
 # help(wfdb.Annotation)
 # wfdb.plot_wfdb(record=record_preview, annotation=annotation_preview, plot_sym=True,
