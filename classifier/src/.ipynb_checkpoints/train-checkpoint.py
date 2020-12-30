@@ -5,7 +5,8 @@ import h5py
 import os
 from ECG_classifier import Model
 
-encoding = '.NLRAaJSVF[!]ejE/fxQ|'
+encoding = 'NAVR'
+freq = [0]*len(encoding)
 
 class NSTDB(torch.utils.data.Dataset):
     def __init__(self):
@@ -16,6 +17,7 @@ class NSTDB(torch.utils.data.Dataset):
                 with h5py.File(path, 'r') as h5:
                     if h5['MLII'][:].size != 252:
                         continue
+                    freq[encoding.index(h5['label'][()])] += 1
                 self.h5_list.append(os.path.join(root, f))
         
     def __getitem__(self, index):
@@ -35,11 +37,12 @@ dataset = NSTDB()
 index, MLII, label = dataset[10000].values()
 print('Label:', label)
 print('Length:', len(dataset))
+print('freq:', freq)
 
 dataset_train, dataset_val = torch.utils.data.random_split(dataset, [int(0.7*len(dataset)), len(dataset)-int(0.7*len(dataset))])
 print(len(dataset_train), len(dataset_val))
 from torch.utils.data import DataLoader
-BATCH_SIZE = 1024
+BATCH_SIZE = 512
 train_loader = DataLoader(dataset_train, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(dataset_val, batch_size=BATCH_SIZE, shuffle=True)
 
