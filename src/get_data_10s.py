@@ -2,7 +2,7 @@ import h5py
 import matplotlib.pyplot as plt
 snr_check = []
 for i in range(0, 648000, 3600):
-    with h5py.File('../data/119e24/'+str(i)+'.h5', 'r') as f:
+    with h5py.File('../data/119e18/'+str(i)+'.h5', 'r') as f:
         snr_check.append(0 if str(f['SNR'][()], 'utf-8')=='clean' else 1)
 plt.plot(range(len(snr_check)), snr_check)
 plt.show()
