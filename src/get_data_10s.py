@@ -11,8 +11,6 @@ ecg = None
 with h5py.File('../data/118e_6/1400.h5', 'r') as f:
     print(f['id'][()])
     print(len(f['MLII'][:]))
-    print(len(f['V1'][:]))
-    print(str(f['label'][()], 'utf-8'))
     print(str(f['SNR'][()], 'utf-8'))
     ecg = f['MLII'][:]
 plt.plot(range(len(ecg)), ecg)
