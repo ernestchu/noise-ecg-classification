@@ -38,8 +38,10 @@ index, MLII, label = dataset[10000].values()
 print('Label:', label)
 print('Length:', len(dataset))
 print('freq:', freq)
+weight = max(freq)/torch.tensor(freq)
+print('Weight', weight)
 
-dataset_train, dataset_val = torch.utils.data.random_split(dataset, [int(0.7*len(dataset)), len(dataset)-int(0.7*len(dataset))])
+dataset_train, dataset_val = torch.utils.data.random_split(dataset, [int(0.9*len(dataset)), len(dataset)-int(0.9*len(dataset))])
 print(len(dataset_train), len(dataset_val))
 from torch.utils.data import DataLoader
 BATCH_SIZE = 512
@@ -48,7 +50,7 @@ val_loader = DataLoader(dataset_val, batch_size=BATCH_SIZE, shuffle=True)
 
 model = Model().cuda()
 
-criterion = nn.CrossEntropyLoss().cuda()
+criterion = nn.CrossEntropyLoss(weight=weight).cuda()
 optimizer = torch.optim.SGD(model.parameters(), lr=1e-3, momentum=0.9)
 
 def train(input_data, model, criterion, optimizer):
