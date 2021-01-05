@@ -1,9 +1,9 @@
 import torch.nn as nn
 
 encoding = 'NAVR'
-class Model(nn.Module):
+class Classifier(nn.Module):
     def __init__(self):
-        super(Model, self).__init__()
+        super(Classifier, self).__init__()
         def convBlock(in_filters, out_filters, normalization=True):
             layers = [nn.Conv1d(in_filters, out_filters, 4, stride=2, padding=1)]
             if normalization:
